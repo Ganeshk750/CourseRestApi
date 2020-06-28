@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ganesh.api.models.Course;
+import com.ganesh.api.repository.CourseRepository;
 import com.ganesh.api.services.CourseService;
 
 import org.springframework.util.StringUtils;
@@ -24,6 +25,7 @@ import org.springframework.util.StringUtils;
 public class CourseController {
 	
 	private CourseService courseService;
+	
 	
 	@Autowired
 	public CourseController(CourseService courseService) {
@@ -56,9 +58,7 @@ public class CourseController {
 				  return new ResponseEntity<Course>(HttpStatus.BAD_REQUEST); 
 			    }
 			  }
-		Course cour = courseService.getCourseById(id);
-		cour.setCourseName(cc.getCourseName());
-		cour.setCourseDescription(cc.getCourseDescription());
+		 Course cour = courseService.updaeCourse(id, cc);
 		return new ResponseEntity<Course>(cour, HttpStatus.OK);
 	}
 	
